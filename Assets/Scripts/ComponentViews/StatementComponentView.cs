@@ -1,56 +1,58 @@
 ﻿using mvreylib.features.messenger;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class StatementComponentView : FadeableComponentView, IMessageSubscriber
+namespace innovamattest.componentviews
 {
-    public TextMeshProUGUI title;
-
-
-    private void Awake()
+    public class StatementComponentView : FadeableComponentView, IMessageSubscriber
     {
-        AddMessageListeners();
-    }
+        public TextMeshProUGUI title;
 
-    public void AddMessageListeners()
-    {
-        Func<ArrayList, bool> OnSetStatementTextDelegate = OnSetStatementText;
-        Messenger.AddListener(MessageEnum.SetStatementText, OnSetStatementTextDelegate);
 
-        Func<bool> OnShowStatementDelegate = OnShowStatement;
-        Messenger.AddListener(MessageEnum.ShowStatement, OnShowStatementDelegate);
-    }
+        private void Awake()
+        {
+            AddMessageListeners();
+        }
 
-    public void RemoveMessageListeners()
-    {
+        public void AddMessageListeners()
+        {
+            Func<ArrayList, bool> OnSetStatementTextDelegate = OnSetStatementText;
+            Messenger.AddListener(MessageEnum.SetStatementText, OnSetStatementTextDelegate);
 
-    }
+            Func<bool> OnShowStatementDelegate = OnShowStatement;
+            Messenger.AddListener(MessageEnum.ShowStatement, OnShowStatementDelegate);
+        }
 
-    private bool OnSetStatementText(ArrayList data)
-    {
-        title.text = data[0] as string;
-        return true;
-    }
+        public void RemoveMessageListeners()
+        {
 
-    private bool OnShowStatement()
-    {
-        StartCoroutine("ShowStatementCoroutine");
-        return true;
-    }
+        }
 
-    private IEnumerator ShowStatementCoroutine()
-    {
-        FadeIn(2.0f);
+        private bool OnSetStatementText(ArrayList data)
+        {
+            title.text = data[0] as string;
+            return true;
+        }
 
-        yield return new WaitForSeconds(4.0f);
+        private bool OnShowStatement()
+        {
+            StartCoroutine("ShowStatementCoroutine");
+            return true;
+        }
 
-        FadeOut(2.0f);
+        private IEnumerator ShowStatementCoroutine()
+        {
+            FadeIn(2.0f);
 
-        yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(4.0f);
 
-        Messenger.SendMessage(MessageEnum.ShowAnswers);
+            FadeOut(2.0f);
+
+            yield return new WaitForSeconds(2.0f);
+
+            Messenger.SendMessage(MessageEnum.ShowAnswers);
+        }
     }
 }

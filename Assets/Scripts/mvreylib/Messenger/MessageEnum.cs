@@ -11,6 +11,7 @@ namespace mvreylib.features.messenger
         SetScoreSuccess,
         SetScoreFail,
 
-        CheckAnswer
+        CheckAnswer,
+        StartNewRoundInTime
     }
 }

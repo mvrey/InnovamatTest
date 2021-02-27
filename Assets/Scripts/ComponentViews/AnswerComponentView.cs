@@ -1,71 +1,73 @@
 ﻿using mvreylib.features.messenger;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
+namespace innovamattest.componentviews
 {
-    public int answerNumber;
-
-    public Button button;
-    public TextMeshProUGUI buttonText;
-
-
-    private void Awake()
+    public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
     {
-        AddMessageListeners();
-    }
+        public int answerNumber;
 
-    public void AddMessageListeners()
-    {
-        Func<bool> OnShowAnswersDelegate = OnShowAnswers;
-        Messenger.AddListener(MessageEnum.ShowAnswers, OnShowAnswersDelegate);
+        public Button button;
+        public TextMeshProUGUI buttonText;
 
-        Func<bool> OnHideAnswersDelegate = OnHideAnswers;
-        Messenger.AddListener(MessageEnum.HideAnswers, OnHideAnswersDelegate);
-    }
 
-    public void RemoveMessageListeners()
-    {
-        
-    }
+        private void Awake()
+        {
+            AddMessageListeners();
+        }
 
-    private bool OnShowAnswers()
-    {
-        StartCoroutine("ShowAnswersCoroutine");
-        return true;
-    }
+        public void AddMessageListeners()
+        {
+            Func<bool> OnShowAnswersDelegate = OnShowAnswers;
+            Messenger.AddListener(MessageEnum.ShowAnswers, OnShowAnswersDelegate);
 
-    private bool OnHideAnswers()
-    {
-        FadeOut(2.0f);
-        return true;
-    }
+            Func<bool> OnHideAnswersDelegate = OnHideAnswers;
+            Messenger.AddListener(MessageEnum.HideAnswers, OnHideAnswersDelegate);
+        }
 
-    private IEnumerator ShowAnswersCoroutine()
-    {
-        button.interactable = false;
-        buttonText.color = Color.white;
+        public void RemoveMessageListeners()
+        {
 
-        FadeIn(2.0f);
+        }
 
-        yield return new WaitForSeconds(2.0f);
+        private bool OnShowAnswers()
+        {
+            StartCoroutine("ShowAnswersCoroutine");
+            return true;
+        }
 
-        button.interactable = true;
-    }
+        private bool OnHideAnswers()
+        {
+            FadeOut(2.0f);
+            return true;
+        }
 
-    public void OnMouseClick()
-    {
-        Messenger.SendMessage(MessageEnum.CheckAnswer, new ArrayList() { this });
-    }
+        private IEnumerator ShowAnswersCoroutine()
+        {
+            button.interactable = false;
+            buttonText.color = Color.white;
 
-    public override void FadeOut(float time)
-    {
-        button.interactable = false;
+            FadeIn(2.0f);
 
-        base.FadeOut(time);
+            yield return new WaitForSeconds(2.0f);
+
+            button.interactable = true;
+        }
+
+        public void OnMouseClick()
+        {
+            Messenger.SendMessage(MessageEnum.CheckAnswer, new ArrayList() { this });
+        }
+
+        public override void FadeOut(float time)
+        {
+            button.interactable = false;
+
+            base.FadeOut(time);
+        }
     }
 }

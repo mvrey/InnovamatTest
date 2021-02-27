@@ -1,96 +1,52 @@
-﻿using mvreylib.features.messenger;
+﻿using innovamattest.componentviews;
+using innovamattest.controllers;
+using innovamattest.models;
+using mvreylib.features.messenger;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NumbersGameView : MonoBehaviour, IMessageSubscriber
+namespace innovamattest.views
 {
-    private NumbersGameController numbersGameController;
-
-    private List<AnswerComponentView> answerComponentViews;
-    
-    public Transform answersContainer;
-
-
-    void Awake()
+    public class NumbersGameView : MonoBehaviour, IMessageSubscriber
     {
-        AddMessageListeners();
-    }
+        private NumbersGameController numbersGameController;
+
+        public Transform answersContainer;
 
 
-    private void Start()
-    {
-        answerComponentViews = new List<AnswerComponentView>();
-
-        numbersGameController = new NumbersGameController();
-
-        StartNewRound();
-    }
-
-    private void SpawnAnswers(List<int> answers)
-    {
-        for (int i = 0; i < answers.Count; i++)
+        private void Awake()
         {
-            AnswerComponentView answerComponentView = Instantiate(NumbersGameDataModel.Get().innovamatTestConfig.answerPrefab, answersContainer);
-            answerComponentViews.Add(answerComponentView);
-        }
-    }
-
-    private void StartNewRound()
-    {
-        numbersGameController.GenerateRoundData();
-        List<int> answers = numbersGameController.GetAnswers();
-
-        if (answerComponentViews.Count == 0)
-        {
-            SpawnAnswers(answers);
+            AddMessageListeners();
         }
 
-        for (int i = 0; i < answerComponentViews.Count; i++)
+        private void Start()
         {
-            answerComponentViews[i].answerNumber = answers[i];
-            answerComponentViews[i].buttonText.text = answers[i].ToString();
+            numbersGameController = new NumbersGameController(answersContainer);
+
+            StartNewRound();
         }
 
-        Messenger.SendMessage(MessageEnum.SetStatementText, new ArrayList() { numbersGameController.GetStatement() });
-        Messenger.SendMessage(MessageEnum.ShowStatement);
-    }
-
-    public void AddMessageListeners()
-    {
-        Func<ArrayList, bool> OnCheckAnswerDelegate = OnCheckAnswer;
-        Messenger.AddListener(MessageEnum.CheckAnswer, OnCheckAnswerDelegate);
-    }
-
-    public void RemoveMessageListeners()
-    {
-        
-    }
-
-    private bool OnCheckAnswer(ArrayList data)
-    {
-        AnswerComponentView answerComponentView = data[0] as AnswerComponentView;
-
-        if (answerComponentView.answerNumber == numbersGameController.GetRightAnswer())
+        public void AddMessageListeners()
         {
-            answerComponentView.buttonText.color = Color.green;
-            numbersGameController.successes++;
-            Messenger.SendMessage(MessageEnum.HideAnswers);
-            Messenger.SendMessage(MessageEnum.SetScoreSuccess, new ArrayList() { numbersGameController.successes });
-            Invoke("StartNewRound", 3.0f);
-        }
-        else
-        {
-            answerComponentView.buttonText.color = Color.red;
-            numbersGameController.fails++;
-            answerComponentView.FadeOut(2.0f);
-            Messenger.SendMessage(MessageEnum.SetScoreFail, new ArrayList() { numbersGameController.fails });
+            Func<ArrayList, bool> StartNewRoundInTimeDelegate = StartNewRoundInTime;
+            Messenger.AddListener(MessageEnum.StartNewRoundInTime, StartNewRoundInTimeDelegate);
         }
 
-        return true;
+        public void RemoveMessageListeners()
+        {
+            
+        }
+
+        private bool StartNewRoundInTime(ArrayList data)
+        {
+            Invoke("StartNewRound", (float)data[0]);
+            return true;
+        }
+        private void StartNewRound()
+        {
+            numbersGameController.StartNewRound();
+        }
     }
-
-
-    
 }

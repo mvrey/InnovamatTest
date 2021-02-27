@@ -1,39 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-public abstract class FadeableComponentView : ComponentView
+namespace innovamattest.componentviews
 {
-    public CanvasGroup canvasGroup;
-    private float time;
-
-    public virtual void FadeOut(float time)
+    public abstract class FadeableComponentView : ComponentView
     {
-        this.time = time;
-        StartCoroutine("FadeOutCoroutine");
-    }
+        public CanvasGroup canvasGroup;
+        private float time;
 
-    IEnumerator FadeOutCoroutine()
-    {
-        while (canvasGroup.alpha > 0)
+        public virtual void FadeOut(float time)
         {
-            canvasGroup.alpha -= Time.deltaTime / time;
-            yield return null;
+            this.time = time;
+            StartCoroutine("FadeOutCoroutine");
         }
-    }
 
-    public virtual void FadeIn(float time)
-    {
-        this.time = time;
-        StartCoroutine("FadeInCoroutine");
-    }
-
-    IEnumerator FadeInCoroutine()
-    {
-        while (canvasGroup.alpha < 1)
+        IEnumerator FadeOutCoroutine()
         {
-            canvasGroup.alpha += Time.deltaTime / time;
-            yield return null;
+            while (canvasGroup.alpha > 0)
+            {
+                canvasGroup.alpha -= Time.deltaTime / time;
+                yield return null;
+            }
+        }
+
+        public virtual void FadeIn(float time)
+        {
+            this.time = time;
+            StartCoroutine("FadeInCoroutine");
+        }
+
+        IEnumerator FadeInCoroutine()
+        {
+            while (canvasGroup.alpha < 1)
+            {
+                canvasGroup.alpha += Time.deltaTime / time;
+                yield return null;
+            }
         }
     }
 }

@@ -16,3 +16,4 @@ MonoBehaviour:
     type: 3}
   answerPrefab: {fileID: 7560136492346234596, guid: 8b75ba659d45ec445815231f6aea65fe,
     type: 3}
+  numAnswers: 3

@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class ComponentView : MonoBehaviour
+namespace innovamattest.componentviews
 {
+    public abstract class ComponentView : MonoBehaviour
+    {
 
+    }
 }

@@ -1,22 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using innovamattest.configs;
 using UnityEngine;
 
-public class NumbersGameDataModel
+namespace innovamattest.models
 {
-    private static NumbersGameDataModel instance;
+    public class NumbersGameDataModel
+    {
+        private static NumbersGameDataModel instance;
 
-    public InnovamatTestConfig innovamatTestConfig;
+        public InnovamatTestConfig innovamatTestConfig;
 
 
-    private NumbersGameDataModel() { }
+        private NumbersGameDataModel() { }
 
-    public static NumbersGameDataModel Get() {
-        if (instance == null)
-        { 
-            instance = new NumbersGameDataModel();
-            instance.innovamatTestConfig = Resources.Load("Configs/InnovamatTestConfig") as InnovamatTestConfig;
+        public static NumbersGameDataModel Get()
+        {
+            if (instance == null)
+            {
+                instance = new NumbersGameDataModel();
+                instance.innovamatTestConfig = Resources.Load("Configs/InnovamatTestConfig") as InnovamatTestConfig;
+            }
+            return instance;
         }
-        return instance;
     }
 }
