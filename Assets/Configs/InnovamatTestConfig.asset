@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e4b8bd5780b0641b44eb828411e4e4, type: 3}
+  m_Name: InnovamatTestConfig
+  m_EditorClassIdentifier: 
+  statementPrefab: {fileID: 9051864491986456063, guid: af9cb1d4bce6d3f4c834fb3e848def0f,
+    type: 3}
+  answerPrefab: {fileID: 7560136492346234596, guid: 8b75ba659d45ec445815231f6aea65fe,
+    type: 3}
