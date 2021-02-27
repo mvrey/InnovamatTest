@@ -16,8 +16,7 @@ public class NumbersGameController
 
     public void GenerateRoundData()
     {
-        //TODO : Dis 3 is config
-        answers = GenerateAnswers(3);
+        answers = GenerateAnswers(NumbersGameDataModel.Get().innovamatTestConfig.numAnswers);
         rightAnswer = answers[Random.Range(0, answers.Count)];
 
         statement = GenerateNumberWord(rightAnswer);
@@ -32,14 +31,12 @@ public class NumbersGameController
     {
         List<int> answers = new List<int>();
 
-        //TODO : Hardcoded 3
-        while (answers.Count < 3)
+        while (answers.Count < NumbersGameDataModel.Get().innovamatTestConfig.numAnswers)
         {
-            int answer = Random.Range(0, 11);
+            int answer = Random.Range(0, numbersToText.Count);
 
             if (!answers.Contains(answer))
-                //TODO : Min & max are config
-                answers.Add(Random.Range(0, 11));
+                answers.Add(Random.Range(0, numbersToText.Count));
         }
 
         return answers;
