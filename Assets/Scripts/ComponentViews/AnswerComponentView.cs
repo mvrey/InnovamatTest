@@ -23,6 +23,9 @@ public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
     {
         Func<bool> OnShowAnswersDelegate = OnShowAnswers;
         Messenger.AddListener(MessageEnum.ShowAnswers, OnShowAnswersDelegate);
+
+        Func<bool> OnHideAnswersDelegate = OnHideAnswers;
+        Messenger.AddListener(MessageEnum.HideAnswers, OnHideAnswersDelegate);
     }
 
     public void RemoveMessageListeners()
@@ -33,6 +36,12 @@ public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
     private bool OnShowAnswers()
     {
         StartCoroutine("ShowAnswersCoroutine");
+        return true;
+    }
+
+    private bool OnHideAnswers()
+    {
+        FadeOut(2.0f);
         return true;
     }
 
@@ -50,5 +59,12 @@ public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
     public void OnMouseClick()
     {
         Messenger.SendMessage(MessageEnum.CheckAnswer, new ArrayList() { this });
+    }
+
+    public override void FadeOut(float time)
+    {
+        button.enabled = false;
+
+        base.FadeOut(time);
     }
 }

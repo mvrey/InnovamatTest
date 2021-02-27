@@ -7,7 +7,7 @@ public abstract class FadeableComponentView : ComponentView
     public CanvasGroup canvasGroup;
     private float time;
 
-    public void FadeOut(float time)
+    public virtual void FadeOut(float time)
     {
         this.time = time;
         StartCoroutine("FadeOutCoroutine");
@@ -22,7 +22,7 @@ public abstract class FadeableComponentView : ComponentView
         }
     }
 
-    public void FadeIn(float time)
+    public virtual void FadeIn(float time)
     {
         this.time = time;
         StartCoroutine("FadeInCoroutine");

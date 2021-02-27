@@ -12,6 +12,7 @@ public class NumbersGameController
     public int successes = 0;
     public int fails = 0;
 
+    private List<string> numbersToText = new List<string>() { "Cero", "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Diez" };
 
     public void Execute()
     {
@@ -24,7 +25,7 @@ public class NumbersGameController
 
     public string GenerateNumberWord(int number)
     {
-        return "CINCO";
+        return numbersToText[number];
     }
 
     public List<int> GenerateAnswers(int amount)

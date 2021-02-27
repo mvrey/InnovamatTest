@@ -56,17 +56,16 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
         {
             answerComponentView.buttonText.color = Color.green;
             numbersGameController.successes++;
+            Messenger.SendMessage(MessageEnum.HideAnswers);
             Messenger.SendMessage(MessageEnum.SetScoreSuccess, new ArrayList() { numbersGameController.successes });
         }
         else
         {
             answerComponentView.buttonText.color = Color.red;
             numbersGameController.fails++;
+            answerComponentView.FadeOut(2.0f);
             Messenger.SendMessage(MessageEnum.SetScoreFail, new ArrayList() { numbersGameController.fails });
         }
-
-        answerComponentView.button.enabled = false;
-        answerComponentView.FadeOut(2.0f);
 
         return true;
     }

@@ -6,6 +6,7 @@ namespace mvreylib.features.messenger
         ShowStatement,
         SetAnswers,
         ShowAnswers,
+        HideAnswers,
 
         SetScoreSuccess,
         SetScoreFail,
