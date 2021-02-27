@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
 {
+    public int answerNumber;
+
     public Button button;
     public TextMeshProUGUI buttonText;
 
@@ -43,5 +45,10 @@ public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
         yield return new WaitForSeconds(2.0f);
 
         button.interactable = true;
+    }
+
+    public void OnMouseClick()
+    {
+        Messenger.SendMessage(MessageEnum.CheckAnswer, new ArrayList() { this });
     }
 }

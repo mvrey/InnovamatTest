@@ -10,18 +10,18 @@ public class ScoreComponentView : ComponentView, IMessageSubscriber
     public TextMeshProUGUI sucessText;
     public TextMeshProUGUI failText;
 
-    private void Start()
+    private void Awake()
     {
         AddMessageListeners();
     }
 
     public void AddMessageListeners()
     {
-        Func<bool> OnAddScoreSuccessDelegate = OnAddScoreSuccess;
-        Messenger.AddListener(MessageEnum.AddScoreSuccess, OnAddScoreSuccessDelegate);
+        Func<ArrayList,bool> OnSetScoreSuccessDelegate = OnSetScoreSuccess;
+        Messenger.AddListener(MessageEnum.SetScoreSuccess, OnSetScoreSuccessDelegate);
 
-        Func<bool> OnAddScoreFailDelegate = OnAddScoreFail;
-        Messenger.AddListener(MessageEnum.AddScoreFail, OnAddScoreFailDelegate);
+        Func<ArrayList,bool> OnSetScoreFailDelegate = OnSetScoreFail;
+        Messenger.AddListener(MessageEnum.SetScoreFail, OnSetScoreFailDelegate);
     }
 
     public void RemoveMessageListeners()
@@ -29,13 +29,17 @@ public class ScoreComponentView : ComponentView, IMessageSubscriber
         
     }
 
-    private bool OnAddScoreSuccess()
+    private bool OnSetScoreSuccess(ArrayList data)
     {
+        int score = (int)data[0];
+        sucessText.text = score.ToString();
         return true;
     }
 
-    private bool OnAddScoreFail()
+    private bool OnSetScoreFail(ArrayList data)
     {
+        int score = (int)data[0];
+        failText.text = score.ToString();
         return true;
     }
 }

@@ -7,7 +7,9 @@ namespace mvreylib.features.messenger
         SetAnswers,
         ShowAnswers,
 
-        AddScoreSuccess,
-        AddScoreFail
+        SetScoreSuccess,
+        SetScoreFail,
+
+        CheckAnswer
     }
 }

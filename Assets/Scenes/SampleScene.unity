@@ -381,6 +381,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &910698657 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 811790193, guid: 7f07b04c31e1f224e90f274f2aa1183d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2885883839504552834}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1269702443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8340739313466942244, guid: 7f07b04c31e1f224e90f274f2aa1183d,
@@ -442,12 +454,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!225 &1972278600 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 6706032621399531742, guid: 7f07b04c31e1f224e90f274f2aa1183d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2885883839504552834}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2885883839504552834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -503,6 +509,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 506551296, guid: 7f07b04c31e1f224e90f274f2aa1183d, type: 3}
+      propertyPath: sucessText
+      value: 
+      objectReference: {fileID: 910698657}
     - target: {fileID: 811790192, guid: 7f07b04c31e1f224e90f274f2aa1183d, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -660,7 +670,7 @@ PrefabInstance:
         type: 3}
       propertyPath: canvasGroup
       value: 
-      objectReference: {fileID: 1972278600}
+      objectReference: {fileID: 0}
     - target: {fileID: 1272485342238856463, guid: 7f07b04c31e1f224e90f274f2aa1183d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -696,6 +706,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: NumbersGameView
       objectReference: {fileID: 0}
+    - target: {fileID: 6519743438931216138, guid: 7f07b04c31e1f224e90f274f2aa1183d,
+        type: 3}
+      propertyPath: InnovamatTestConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 29cc35bfe88bf2c438c48c535a80477c,
+        type: 2}
     - target: {fileID: 6706032621399531742, guid: 7f07b04c31e1f224e90f274f2aa1183d,
         type: 3}
       propertyPath: m_Alpha

@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class NumbersGameController
 {
+    private List<int> answers;
     private int rightAnswer;
+    private string statement;
+
+    public int successes = 0;
+    public int fails = 0;
 
 
     public void Execute()
     {
         //TODO : Dis 3 is config
-        List<int> answers = GenerateAnswers(3);
+        answers = GenerateAnswers(3);
         rightAnswer = answers[Random.Range(0, answers.Count)];
 
-        string statement = GenerateNumberWord(rightAnswer);
-
-        Messenger.SendMessage(MessageEnum.SetStatementText, new ArrayList() { statement });
-        Messenger.SendMessage(MessageEnum.ShowStatement);
-
-        Messenger.SendMessage(MessageEnum.SetAnswers, new ArrayList() { answers });
+        statement = GenerateNumberWord(rightAnswer);
     }
 
     public string GenerateNumberWord(int number)
@@ -38,5 +38,19 @@ public class NumbersGameController
         }
 
         return answers;
+    }
+
+
+    public List<int> GetAnswers()
+    {
+        return answers;
+    }
+    public int GetRightAnswer()
+    {
+        return rightAnswer;
+    }
+    public string GetStatement()
+    {
+        return statement;
     }
 }
