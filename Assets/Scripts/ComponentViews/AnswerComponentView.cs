@@ -48,6 +48,7 @@ public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
     private IEnumerator ShowAnswersCoroutine()
     {
         button.interactable = false;
+        buttonText.color = Color.white;
 
         FadeIn(2.0f);
 
@@ -63,7 +64,7 @@ public class AnswerComponentView : FadeableComponentView, IMessageSubscriber
 
     public override void FadeOut(float time)
     {
-        button.enabled = false;
+        button.interactable = false;
 
         base.FadeOut(time);
     }

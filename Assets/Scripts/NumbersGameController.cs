@@ -14,7 +14,7 @@ public class NumbersGameController
 
     private List<string> numbersToText = new List<string>() { "Cero", "Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Diez" };
 
-    public void Execute()
+    public void GenerateRoundData()
     {
         //TODO : Dis 3 is config
         answers = GenerateAnswers(3);

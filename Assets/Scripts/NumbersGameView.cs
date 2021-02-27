@@ -8,6 +8,8 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
 {
     private NumbersGameController numbersGameController;
 
+    private List<AnswerComponentView> answerComponentViews;
+    
     public Transform answersContainer;
 
     public InnovamatTestConfig InnovamatTestConfig;
@@ -20,17 +22,36 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
 
     private void Start()
     {
+        answerComponentViews = new List<AnswerComponentView>();
+
         numbersGameController = new NumbersGameController();
 
-        numbersGameController.Execute();
+        StartNewRound();
+    }
 
-        List<int> answers = numbersGameController.GetAnswers();
-
+    private void SpawnAnswers(List<int> answers)
+    {
         for (int i = 0; i < answers.Count; i++)
         {
             AnswerComponentView answerComponentView = Instantiate(InnovamatTestConfig.answerPrefab, answersContainer);
-            answerComponentView.answerNumber = answers[i];
-            answerComponentView.buttonText.text = answers[i].ToString();
+            answerComponentViews.Add(answerComponentView);
+        }
+    }
+
+    private void StartNewRound()
+    {
+        numbersGameController.GenerateRoundData();
+        List<int> answers = numbersGameController.GetAnswers();
+
+        if (answerComponentViews.Count == 0)
+        {
+            SpawnAnswers(answers);
+        }
+
+        for (int i = 0; i < answerComponentViews.Count; i++)
+        {
+            answerComponentViews[i].answerNumber = answers[i];
+            answerComponentViews[i].buttonText.text = answers[i].ToString();
         }
 
         Messenger.SendMessage(MessageEnum.SetStatementText, new ArrayList() { numbersGameController.GetStatement() });
@@ -58,6 +79,7 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
             numbersGameController.successes++;
             Messenger.SendMessage(MessageEnum.HideAnswers);
             Messenger.SendMessage(MessageEnum.SetScoreSuccess, new ArrayList() { numbersGameController.successes });
+            Invoke("StartNewRound", 3.0f);
         }
         else
         {
@@ -69,4 +91,7 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
 
         return true;
     }
+
+
+    
 }
