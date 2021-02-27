@@ -32,10 +32,14 @@ public class NumbersGameController
     {
         List<int> answers = new List<int>();
 
-        for (int i = 0; i < amount; i++)
+        //TODO : Hardcoded 3
+        while (answers.Count < 3)
         {
-            //TODO : Min & max are config
-            answers.Add(Random.Range(0, 11));
+            int answer = Random.Range(0, 11);
+
+            if (!answers.Contains(answer))
+                //TODO : Min & max are config
+                answers.Add(Random.Range(0, 11));
         }
 
         return answers;
