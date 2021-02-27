@@ -12,7 +12,6 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
     
     public Transform answersContainer;
 
-    public InnovamatTestConfig InnovamatTestConfig;
 
     void Awake()
     {
@@ -33,7 +32,7 @@ public class NumbersGameView : MonoBehaviour, IMessageSubscriber
     {
         for (int i = 0; i < answers.Count; i++)
         {
-            AnswerComponentView answerComponentView = Instantiate(InnovamatTestConfig.answerPrefab, answersContainer);
+            AnswerComponentView answerComponentView = Instantiate(NumbersGameDataModel.Get().innovamatTestConfig.answerPrefab, answersContainer);
             answerComponentViews.Add(answerComponentView);
         }
     }
